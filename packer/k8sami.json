@@ -1,0 +1,30 @@
+{
+    "variables": {
+      "region": "us-east-1"
+    },
+    "builders": [
+      {
+        "type": "amazon-ebs",
+        "region": "{{user `region`}}",
+        "source_ami_filter": {
+          "filters": {
+            "virtualization-type": "hvm",
+            "name": "ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*",
+            "root-device-type": "ebs"
+          },
+          "owners": ["099720109477"],
+          "most_recent": true
+        },
+        "instance_type": "t2.medium",
+        "ssh_username": "ubuntu",
+        "ami_name": "k8s-ami-{{timestamp}}"
+      }
+    ],
+    "provisioners": [
+      {
+        "type": "shell",
+        "script": "./install-kubeadm.sh",
+        "execute_command": "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+      }
+    ]
+  }
