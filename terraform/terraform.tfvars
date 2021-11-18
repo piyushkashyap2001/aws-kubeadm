@@ -12,6 +12,8 @@ cluster = {
 
 ami = "k8s-ami-5729524641"
 
+aws_account_no = ""
+
 cluster_worker = {
   instance_type    = "t2.medium"
   max_size         = 5
@@ -31,5 +33,3 @@ autoscaling_group_enabled_metrics = ["GroupMinSize", "GroupMaxSize", "GroupDesir
 allowed_workstations_cidr = ["117.253.22.128"]
 
 elb_region_owner_id = "127311923021"
-
-aws_account_no = ""

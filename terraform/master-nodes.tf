@@ -144,13 +144,33 @@ resource "aws_security_group_rule" "k8s_master_nodes_etcd_ingress" {
   type                     = "ingress"
 }
 
-resource "aws_security_group_rule" "k8s_master_nodes_components_ingress" {
+resource "aws_security_group_rule" "k8s_master_nodes_kubelet_ingress" {
   description              = "Allow master node kubernetes components communication"
   from_port                = 10250
   protocol                 = "tcp"
   security_group_id        = aws_security_group.k8s_master_nodes_sg.id
   source_security_group_id = aws_security_group.k8s_master_nodes_sg.id
-  to_port                  = 10252
+  to_port                  = 10250
+  type                     = "ingress"
+}
+
+resource "aws_security_group_rule" "k8s_master_nodes_controller_ingress" {
+  description              = "Allow master node kubernetes components communication"
+  from_port                = 10257
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.k8s_master_nodes_sg.id
+  source_security_group_id = aws_security_group.k8s_master_nodes_sg.id
+  to_port                  = 10257
+  type                     = "ingress"
+}
+
+resource "aws_security_group_rule" "k8s_master_nodes_scheduler_ingress" {
+  description              = "Allow master node kubernetes components communication"
+  from_port                = 10259
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.k8s_master_nodes_sg.id
+  source_security_group_id = aws_security_group.k8s_master_nodes_sg.id
+  to_port                  = 10259
   type                     = "ingress"
 }
 
@@ -159,9 +179,9 @@ resource "aws_security_group_rule" "k8s_master_nodes_lb_ingress" {
   from_port         = 6443
   protocol          = "tcp"
   security_group_id = aws_security_group.k8s_master_nodes_sg.id
-  cidr_blocks = ["0.0.0.0/0"]
-  to_port     = 6443
-  type        = "ingress"
+  cidr_blocks       = ["0.0.0.0/0"]
+  to_port           = 6443
+  type              = "ingress"
 }
 
 resource "aws_security_group_rule" "k8s_master_nodes_ssh" {
@@ -174,20 +194,30 @@ resource "aws_security_group_rule" "k8s_master_nodes_ssh" {
   type                     = "ingress"
 }
 
-resource "aws_security_group_rule" "k8s_master_nodes_worker_ingress" {
-  description              = "Allow master node to communicate with worker nodes"
-  from_port                = 0
-  protocol                 = "-1"
-  security_group_id        = aws_security_group.k8s_master_nodes_sg.id
-  source_security_group_id = aws_security_group.k8s_worker_nodes_sg.id
-  to_port                  = 0
-  type                     = "ingress"
-}
+# resource "aws_security_group_rule" "k8s_master_nodes_worker_ingress" {
+#   description              = "Allow master node to communicate with worker nodes"
+#   from_port                = 0
+#   protocol                 = "-1"
+#   security_group_id        = aws_security_group.k8s_master_nodes_sg.id
+#   source_security_group_id = aws_security_group.k8s_worker_nodes_sg.id
+#   to_port                  = 0
+#   type                     = "ingress"
+# }
 
+# resource "aws_security_group_rule" "k8s_master_nodes_health_check" {
+#   description       = "Allow AWS NLB to perform health check on master nodes"
+#   from_port         = 80
+#   protocol          = "tcp"
+#   security_group_id = aws_security_group.k8s_master_nodes_sg.id
+#   # cidr_blocks       = ["192.168.0.0/16"]
+#   source_security_group_id = aws_security_group.elb_6443.id
+#   to_port                  = 80
+#   type                     = "ingress"
+# }
 
 resource "aws_security_group_rule" "master_connect_worker_kubelet" {
   cidr_blocks       = [var.vpc_cidr]
-  description       = "Allow the master node to connect to worker node kubelets"
+  description       = "Allow the control plane to connect to master and worker node kubelets"
   from_port         = 10250
   to_port           = 10250
   protocol          = "tcp"
@@ -221,6 +251,16 @@ resource "aws_security_group_rule" "master_connect_https" {
   from_port         = 443
   to_port           = 443
   protocol          = "tcp"
+  security_group_id = aws_security_group.k8s_master_nodes_sg.id
+  type              = "egress"
+}
+
+resource "aws_security_group_rule" "master_connect_VPC" {
+  cidr_blocks       = [var.vpc_cidr]
+  description       = "Allow the master node to connect to any node in VPC on any protocol"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
   security_group_id = aws_security_group.k8s_master_nodes_sg.id
   type              = "egress"
 }

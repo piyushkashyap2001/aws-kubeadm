@@ -99,15 +99,15 @@ resource "aws_security_group_rule" "k8s_worker_nodes_self_ingress" {
   type                     = "ingress"
 }
 
-resource "aws_security_group_rule" "k8s_worker_nodes_master_ingress" {
-  description              = "Allow pods to receive communication from the cluster control plane"
-  from_port                = 0
-  protocol                 = "-1"
-  security_group_id        = aws_security_group.k8s_worker_nodes_sg.id
-  source_security_group_id = aws_security_group.k8s_master_nodes_sg.id
-  to_port                  = 0
-  type                     = "ingress"
-}
+# resource "aws_security_group_rule" "k8s_worker_nodes_master_ingress" {
+#   description              = "Allow pods to receive communication from the cluster control plane"
+#   from_port                = 0
+#   protocol                 = "-1"
+#   security_group_id        = aws_security_group.k8s_worker_nodes_sg.id
+#   source_security_group_id = aws_security_group.k8s_master_nodes_sg.id
+#   to_port                  = 0
+#   type                     = "ingress"
+# }
 
 resource "aws_security_group_rule" "k8s_worker_nodes_ssh" {
   description              = "Allow bastion host to ssh into the worker nodes"
