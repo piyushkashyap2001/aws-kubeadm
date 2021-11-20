@@ -1,0 +1,12 @@
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: JoinConfiguration
+discovery:
+  bootstrapToken:
+    token: <token>
+    apiServerEndpoint: <load balancer url>
+    caCertHashes:
+      - <hash value>
+nodeRegistration:
+  name: <worker node host name>
+  kubeletExtraArgs:
+    cloud-provider: aws
