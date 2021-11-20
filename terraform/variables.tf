@@ -39,7 +39,7 @@ variable "cluster" {
 
 variable "ami" {
   type    = string
-  default = "k8s-ami-5729524641"
+  default = ""
 }
 
 variable "cluster_worker" {
@@ -82,6 +82,6 @@ variable "elb_region_owner_id" {
 }
 
 variable "aws_account_no" {
-  type = string
+  type    = string
   default = ""
 }

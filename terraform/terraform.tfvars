@@ -10,9 +10,9 @@ cluster = {
   environment      = "dev"
 }
 
-ami = "k8s-ami-5729524641"
+ami = "<ami id>"
 
-aws_account_no = ""
+aws_account_no = "<aws account no>"
 
 cluster_worker = {
   instance_type    = "t2.medium"
