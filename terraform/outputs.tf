@@ -5,8 +5,6 @@ kind: ClusterConfiguration
 apiServer:
   extraArgs:
     cloud-provider: aws
-apiServerExtraArgs:
-  endpoint-reconciler-type: lease
 clusterName: ${var.cluster["cluster_name"]}
 kubernetesVersion: stable
 controllerManager:
