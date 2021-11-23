@@ -3,8 +3,6 @@ kind: ClusterConfiguration
 apiServer:
   extraArgs:
     cloud-provider: aws
-apiServerExtraArgs:
-  endpoint-reconciler-type: lease
 clusterName: k8s-cluster
 kubernetesVersion: stable
 controllerManager:

@@ -5,8 +5,8 @@ discovery:
     token: <token>
     apiServerEndpoint: <load balancer url>
     caCertHashes:
-      - <hash value>
+      - <certificate hash>
 nodeRegistration:
-  name: <worker node host name>
+  name: <Worker node FQDN>
   kubeletExtraArgs:
     cloud-provider: aws

@@ -25,7 +25,7 @@ echo "Receiving token"
 result=$(aws ssm list-command-invocations --command-id "$${sh_command_id}" --details --region ${region} | jq -j ".CommandInvocations[0].CommandPlugins[0].Output")
 token=$(echo $${result}| cut -d ' ' -f 1)
 
-#  Generate kubeadm join command, however we will not use this command to join the cluster. This is a hack, required to update cluster-info.yaml with JWS in data section of kubeadm configmap. We will pass a config file to kubeadm join command as we are providing extra paramater for kubelet (cloud-provider: aws)
+#  Generate kubeadm join command, however we will not use this command to join the cluster. This is a hack, required to update cluster-info.yaml with JWS in data section of kubeadm configmap. We will instead pass a config file to kubeadm join command as we are providing extra paramater for kubelet (cloud-provider: aws)
 echo "generating join command"
 sh_command_id=$(aws ssm send-command \
     --instance-ids "$${instance}" \
