@@ -72,7 +72,7 @@ hashValue=$(echo $${result} | awk '{print $2}')
 hostname=$(curl -s http://169.254.169.254/latest/meta-data/local-hostname)
 
 # Create a config file for worker nodes to join the cluster
-cat <<EOF > /home/ubuntu/worker-config.yaml
+cat <<EOF > /home/ubuntu/worker-join-config.yaml
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: JoinConfiguration
 discovery:
@@ -88,7 +88,7 @@ nodeRegistration:
 EOF
 
 # Command to join the cluster
-result = $(kubeadm join --config /home/ubuntu/worker-config.yaml)
+result = $(kubeadm join --config /home/ubuntu/worker-join-config.yaml)
 echo "kubeadm join output ==> $${result}."
 
 # Delete generated token

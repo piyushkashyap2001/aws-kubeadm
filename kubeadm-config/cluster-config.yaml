@@ -3,16 +3,20 @@ kind: ClusterConfiguration
 apiServer:
   extraArgs:
     cloud-provider: aws
-clusterName: k8s-cluster
+clusterName: <cluster-name>
 kubernetesVersion: stable
 controllerManager:
   extraArgs:
     cloud-provider: aws
-    configure-cloud-routes: "false"    
+    configure-cloud-routes: "false"
+    address: 0.0.0.0
 controlPlaneEndpoint: <load balancer url>
 networking:
   dnsDomain: cluster.local
   podSubnet: 192.168.0.0/16
+scheduler:
+  extraArgs:
+    address: 0.0.0.0
 ---
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: InitConfiguration
