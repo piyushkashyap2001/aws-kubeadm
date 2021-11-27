@@ -70,15 +70,7 @@ variable "autoscaling_group_enabled_metrics" {
 
 variable "allowed_workstations_cidr" {
   type    = list(string)
-  default = ["117.253.22.128"]
-}
-
-
-#ELB Logging 
-
-variable "elb_region_owner_id" {
-  type    = string
-  default = "127311923021"
+  default = ["117.253.22.128/32"]
 }
 
 variable "aws_account_no" {

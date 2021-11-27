@@ -3,7 +3,7 @@ kind: JoinConfiguration
 discovery:
   bootstrapToken:
     token: <token>
-    apiServerEndpoint: <load-balancer-url>
+    apiServerEndpoint: <load-balancer-url:6443>
     caCertHashes:
       - <certificate-hash>
 nodeRegistration:

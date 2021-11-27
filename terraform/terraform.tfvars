@@ -30,6 +30,5 @@ cluster_master = {
 
 autoscaling_group_enabled_metrics = ["GroupMinSize", "GroupMaxSize", "GroupDesiredCapacity", "GroupInServiceInstances", "GroupPendingInstances", "GroupStandbyInstances", "GroupTerminatingInstances", "GroupTotalInstances"]
 
-allowed_workstations_cidr = ["117.253.22.128"]
+allowed_workstations_cidr = ["117.253.22.128/32"]
 
-elb_region_owner_id = "127311923021"
