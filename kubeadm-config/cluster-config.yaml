@@ -10,10 +10,10 @@ controllerManager:
     cloud-provider: aws
     configure-cloud-routes: "false"
     address: 0.0.0.0
-controlPlaneEndpoint: <load balancer url>
+controlPlaneEndpoint: <load-balancer-url>
 networking:
   dnsDomain: cluster.local
-  podSubnet: 192.168.0.0/16
+  podSubnet: <vpc-cidr>
 scheduler:
   extraArgs:
     address: 0.0.0.0

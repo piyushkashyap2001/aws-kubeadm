@@ -3,10 +3,10 @@ kind: JoinConfiguration
 discovery:
   bootstrapToken:
     token: <token>
-    apiServerEndpoint: <load balancer url>
+    apiServerEndpoint: <load-balancer-url>
     caCertHashes:
-      - <certificate hash>
+      - <certificate-hash>
 nodeRegistration:
-  name: <Worker node FQDN>
+  name: <worker-node-FQDN>
   kubeletExtraArgs:
     cloud-provider: aws

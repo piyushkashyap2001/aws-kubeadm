@@ -3,13 +3,13 @@ kind: JoinConfiguration
 discovery:
   bootstrapToken:
     token: <token>
-    apiServerEndpoint: <load balancer url>
-    caCertHashes: [<certificate hash>]
+    apiServerEndpoint: <load-balancer-url>
+    caCertHashes: [<certificate-hash>]
 nodeRegistration:
-  name: <master node FQDN>
+  name: <master-node-FQDN>
   kubeletExtraArgs:
     cloud-provider: aws
 controlPlane:
   localAPIEndpoint:
-    advertiseAddress: <master node private ip>
-  certificateKey: <certificate key>
+    advertiseAddress: <master-node-private-ip>
+  certificateKey: <certificate-key>
