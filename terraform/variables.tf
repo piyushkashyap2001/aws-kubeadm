@@ -70,7 +70,7 @@ variable "autoscaling_group_enabled_metrics" {
 
 variable "allowed_workstations_cidr" {
   type    = list(string)
-  default = ["117.253.22.128/32"]
+  default = ["0.0.0.0/0"]
 }
 
 variable "aws_account_no" {
