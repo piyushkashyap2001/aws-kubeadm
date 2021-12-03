@@ -1,4 +1,4 @@
-apiVersion: kubeadm.k8s.io/v1beta3
+apiVersion: kubeadm.k8s.io/v1beta2
 kind: JoinConfiguration
 discovery:
   bootstrapToken:
@@ -8,8 +8,8 @@ discovery:
 nodeRegistration:
   name: <master-node-FQDN>
   kubeletExtraArgs:
-    cloud-provider: external
+    cloud-provider: aws
 controlPlane:
   localAPIEndpoint:
-    advertiseAddress: <master-node-private-ip>
+    advertiseAddress: 192.168.3.17
   certificateKey: <certificate-key>
