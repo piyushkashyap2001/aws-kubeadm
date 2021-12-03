@@ -1,25 +1,22 @@
-apiVersion: kubeadm.k8s.io/v1beta2
+apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration
 apiServer:
   extraArgs:
-    cloud-provider: aws
+    cloud-provider: external
 clusterName: <cluster-name>
-kubernetesVersion: stable
 controllerManager:
   extraArgs:
-    cloud-provider: aws
-    configure-cloud-routes: "false"
-    address: 0.0.0.0
+    cloud-provider: external
+kubernetesVersion: stable # can use "stable"
 controlPlaneEndpoint: <load-balancer-url:6443>
 networking:
   dnsDomain: cluster.local
   podSubnet: <vpc-cidr>
-scheduler:
-  extraArgs:
-    address: 0.0.0.0
+
 ---
-apiVersion: kubeadm.k8s.io/v1beta2
+apiVersion: kubeadm.k8s.io/v1beta3
 kind: InitConfiguration
 nodeRegistration:
+  name: <master-node-FQDN>
   kubeletExtraArgs:
-    cloud-provider: aws
+    cloud-provider: external
