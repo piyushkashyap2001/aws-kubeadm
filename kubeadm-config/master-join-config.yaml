@@ -11,5 +11,5 @@ nodeRegistration:
     cloud-provider: aws
 controlPlane:
   localAPIEndpoint:
-    advertiseAddress: 192.168.3.17
+    advertiseAddress: <master-node-private-ip>
   certificateKey: <certificate-key>

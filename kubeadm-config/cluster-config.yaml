@@ -2,17 +2,21 @@ apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
 apiServer:
   extraArgs:
-    cloud-provider: aws
+    cloud-provider: aws #https://serverfault.com/questions/1016010/aws-cloud-provider-integration-with-kubernetes-nodes-stuck-with-uninitialized
 clusterName: <cluster-name>
 kubernetesVersion: stable
 controllerManager:
   extraArgs:
     cloud-provider: aws
-    configure-cloud-routes: "false"    
+    configure-cloud-routes: "false"
+    address: 0.0.0.0  
 controlPlaneEndpoint: <load-balancer-url:6443>
 networking:
   dnsDomain: cluster.local
   podSubnet: <vpc-cidr>
+scheduler:
+  extraArgs:
+    address: 0.0.0.0
 ---
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: InitConfiguration
